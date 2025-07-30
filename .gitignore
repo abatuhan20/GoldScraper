@@ -9,9 +9,6 @@ package-lock.json
 # macOS
 .DS_Store
 
-# Puppeteer Chromium cache
-.chromium/
-
 # Vercel (lokal configler)
 .vercel/
 

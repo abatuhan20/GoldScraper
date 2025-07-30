@@ -6,7 +6,7 @@ const app = express();
 async function scrapeAltinFiyat(url, selector) {
   const browser = await puppeteer.launch({
   headless: true,
-  executablePath: '/usr/bin/google-chrome',
+  executablePath: require('puppeteer').executablePath(), // Dinamik path
   args: ['--no-sandbox', '--disable-setuid-sandbox']
 });
   const page = await browser.newPage();
