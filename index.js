@@ -128,7 +128,7 @@ app.get("/", (req, res) => {
   res.send("Goldscraper API aktif. Uygun endpoint'ler:\n/api/14ayar\n/api/22ayar\n/api/gram\n/api/ons\n/api/dolar\n/api/euro\n/api/gumus\n/api/cumhuriyet");
 });
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`goldscraper API aktif: http://localhost:${port}`);
 });
