@@ -1,16 +1,15 @@
 const express = require("express");
-const chrome = require("chrome-aws-lambda");
+const chromium = require("chrome-aws-lambda");
 const puppeteer = require("puppeteer-core");
 
 const app = express();
 
 async function scrapeAltinFiyat(url, selector) {
-  const browser = await puppeteer.launch({
-    args: chrome.args,
-    executablePath: await chrome.executablePath,
-    headless: chrome.headless,
-    defaultViewport: chrome.defaultViewport,
-  });
+  const browser = await chromium.puppeteer.launch({
+  args: chromium.args,
+  executablePath: await chromium.executablePath || '/usr/bin/google-chrome',
+  headless: chromium.headless,
+});
 
   const page = await browser.newPage();
 
