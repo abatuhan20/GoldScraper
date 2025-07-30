@@ -4,11 +4,14 @@ const puppeteer = require("puppeteer");
 const app = express();
 
 async function scrapeAltinFiyat(url, selector) {
-  const browser = await puppeteer.launch({
+
+
+const browser = await puppeteer.launch({
   headless: true,
-  executablePath: '/opt/render/.cache/puppeteer/chrome/linux-138.0.7204.168/chrome-linux64/chrome',
+  executablePath: puppeteer.executablePath(),
   args: ['--no-sandbox', '--disable-setuid-sandbox']
 });
+
   const page = await browser.newPage();
 
   await page.setUserAgent("Mozilla/5.0");
@@ -77,6 +80,7 @@ app.get("/api/ons", async (req, res) => {
 // Dolar Fiyatı
 app.get("/api/dolar", async (req, res) => {
   try {
+    console.log('Executable path is:', puppeteer.executablePath());
     const fiyat = await scrapeAltinFiyat(
       "https://altin.in", // Anasayfa
       '#dfiy' // Dolar fiyatı
