@@ -1,16 +1,16 @@
 const express = require("express");
-const puppeteer = require("puppeteer");
+const chrome = require("chrome-aws-lambda");
+const puppeteer = require("puppeteer-core");
 
 const app = express();
 
 async function scrapeAltinFiyat(url, selector) {
-
-
-const browser = await puppeteer.launch({
-  headless: true,
-  executablePath: puppeteer.executablePath(),
-  args: ['--no-sandbox', '--disable-setuid-sandbox']
-});
+  const browser = await puppeteer.launch({
+    args: chrome.args,
+    executablePath: await chrome.executablePath,
+    headless: chrome.headless,
+    defaultViewport: chrome.defaultViewport,
+  });
 
   const page = await browser.newPage();
 
@@ -24,6 +24,7 @@ const browser = await puppeteer.launch({
 
   return parseFloat(fiyat);
 }
+
 
 // 14 Ayar Altın
 app.get("/api/14ayar", async (req, res) => {
